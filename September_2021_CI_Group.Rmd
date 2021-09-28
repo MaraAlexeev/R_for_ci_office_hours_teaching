@@ -1,0 +1,100 @@
+---
+title: "Questions"
+author: "Mara Alexeev"
+date: "Created 2021-09-27, last updated `r Sys.Date()`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(janitor)
+library(tidyverse)
+library(magrittr)
+library(openxlsx)
+```
+
+## Topics
+
+- Open Rstudio 
+
+- Create a project
+
+- Name project
+
+- Start A git repo
+
+- Create data folder
+
+- Put data into folder
+
+- Look at data in excel
+
+- Import data with magic button
+
+```{r}
+library(readxl)
+fake_data <- read_excel("data/fake_data.xlsx", 
+    skip = 1, n_max = 5)
+```
+
+
+- Load data with a relative path
+
+- Use janitor
+
+```{r}
+clean_fake_data <- janitor::clean_names(fake_data)
+```
+
+
+- Rename a column specifically 
+
+```{r}
+new_column_name_data <- clean_fake_data %>% rename(rating = how_much_mara_likes_this_fruit)
+```
+
+
+- Store data as a dataframe or a tibble
+
+```{r}
+dataframe_data <- as.data.frame(new_column_name_data)
+
+tibble_data <- as_tibble(new_column_name_data)
+```
+
+```{r}
+dataframe_data
+```
+```{r}
+tibble_data
+```
+[What is the difference?](https://r4ds.had.co.nz/tibbles.html)
+
+- Writing data to file
+
+```{r}
+write.xlsx(tibble_data, "output/tibble_data.xlsx")
+```
+
+
+## R syntax
+
+
+```{r}
+tibble_data[1]
+
+tibble_data[1,2]
+```
+```{r}
+class(tibble_data[2])
+tibble_data[2]
+
+class(tibble_data[[2]])
+tibble_data[[2]]
+
+class(tibble_data[[2,1]])
+tibble_data[[2,1]]
+```
+
+[Subsetting.](https://r4ds.had.co.nz/vectors.html#subsetting-1)
